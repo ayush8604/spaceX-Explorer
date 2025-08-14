@@ -18,10 +18,10 @@ const LaunchRow = memo<LaunchRowProps>(({ launch, onPress }) => {
   };
 
   const getStatusColor = () => {
-    if (launch.upcoming) return '#FFA500'; // Orange
-    if (launch.success === true) return '#4CAF50'; // Green
-    if (launch.success === false) return '#F44336'; // Red
-    return '#9E9E9E'; // Gray
+    if (launch.upcoming) return '#FFA500'; 
+    if (launch.success === true) return '#4CAF50'; 
+    if (launch.success === false) return '#F44336'; 
+    return '#9E9E9E'; 
   };
 
   const formatDate = (dateString: string) => {

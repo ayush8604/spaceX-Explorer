@@ -3,7 +3,6 @@ import { Launchpad } from '../lib/types';
 import { api } from '../lib/api';
 import { logger } from '../lib/logger';
 
-// Simple in-memory cache for launchpad data
 const launchpadCache = new Map<string, Launchpad>();
 
 export function useLaunchpad(launchpadId: string) {
@@ -14,7 +13,7 @@ export function useLaunchpad(launchpadId: string) {
   const fetchLaunchpad = useCallback(async () => {
     if (!launchpadId) return;
 
-    // Check cache first
+   
     if (launchpadCache.has(launchpadId)) {
       setLaunchpad(launchpadCache.get(launchpadId)!);
       return;
@@ -26,7 +25,7 @@ export function useLaunchpad(launchpadId: string) {
       
       const data = await api.fetchLaunchpad(launchpadId);
       
-      // Cache the result
+      
       launchpadCache.set(launchpadId, data);
       setLaunchpad(data);
     } catch (err) {

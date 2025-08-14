@@ -32,7 +32,7 @@ export default function LandingPage() {
 
     // Navigate to main app after 3 seconds
     const timer = setTimeout(() => {
-      router.replace('index');
+      router.replace('/');
     }, 3000);
 
     return () => clearTimeout(timer);

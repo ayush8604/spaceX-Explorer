@@ -8,6 +8,7 @@ import {
   RefreshControl,
   ActivityIndicator,
   Keyboard,
+  TouchableOpacity,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useLaunches } from '../hooks/useLaunches';
@@ -67,6 +68,7 @@ export default function LaunchListScreen() {
   }, [router]);
 
   const handleSearch = useCallback((text: string) => {
+    console.log('Search input changed to:', text);
     setSearchText(text);
   }, []);
 
@@ -93,7 +95,7 @@ export default function LaunchListScreen() {
   const keyExtractor = useCallback((item: Launch) => item.id, []);
 
   const getItemLayout = useCallback((data: any, index: number) => ({
-    length: 92, // Height of LaunchRow
+    length: 92, 
     offset: 92 * index,
     index,
   }), []);
@@ -120,6 +122,18 @@ export default function LaunchListScreen() {
             returnKeyType="search"
             onSubmitEditing={() => Keyboard.dismiss()}
           />
+          {searchText.length > 0 && (
+            <TouchableOpacity
+              style={styles.clearButton}
+              onPress={() => {
+                setSearchText('');
+                reset();
+              }}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Text style={styles.clearButtonText}>✕</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
 
@@ -172,12 +186,26 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingHorizontal: 4,
     paddingVertical: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   searchInput: {
     height: 44,
     paddingHorizontal: 16,
     fontSize: 16,
     color: '#333',
+    flex: 1,
+  },
+  clearButton: {
+    padding: 8,
+    marginLeft: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  clearButtonText: {
+    fontSize: 18,
+    color: '#999',
+    fontWeight: 'bold',
   },
   footer: {
     padding: 16,

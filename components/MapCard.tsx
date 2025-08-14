@@ -44,16 +44,7 @@ const MapCard: React.FC<MapCardProps> = ({ launchpad }) => {
   const getMapRegion = () => {
     const { latitude, longitude } = launchpad;
     
-    if (!isValidCoordinate(latitude, longitude)) {
-      // Fallback to a default location (Cape Canaveral)
-      return {
-        latitude: 28.5729,
-        longitude: -80.6490,
-        latitudeDelta: 0.1,
-        longitudeDelta: 0.1,
-      };
-    }
-
+    // Always use the actual launchpad coordinates from the API
     return {
       latitude,
       longitude,
@@ -143,20 +134,7 @@ const MapCard: React.FC<MapCardProps> = ({ launchpad }) => {
       isValid: isValidCoordinate(launchpad.latitude, launchpad.longitude)
     });
 
-    // If coordinates are invalid, show fallback
-    if (!isValidCoordinate(launchpad.latitude, launchpad.longitude)) {
-      return (
-        <View style={styles.mapFallbackContainer}>
-          <Text style={styles.mapFallbackText}>Map Unavailable</Text>
-          <Text style={styles.coordinatesText}>
-            Coordinates: {launchpad.latitude}, {launchpad.longitude}
-          </Text>
-          <Text style={styles.fallbackInfo}>
-            This launchpad has invalid coordinates. Please check the data source.
-          </Text>
-        </View>
-      );
-    }
+    // Always show the map with actual launchpad coordinates from the API
 
     const mapRegion = getMapRegion();
 

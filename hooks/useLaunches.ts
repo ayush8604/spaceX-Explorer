@@ -49,16 +49,21 @@ export function useLaunches() {
   }, [hasNextPage, loading, currentPage, fetchPage, searchQuery]);
 
   const search = useCallback(async (query: string) => {
+    console.log('Searching for:', query);
     setSearchQuery(query);
     setLaunches([]);
     setCurrentPage(1);
     setHasNextPage(false);
-    await fetchPage(1, query);
+    
+    try {
+      await fetchPage(1, query);
+      console.log('Search completed for:', query);
+    } catch (error) {
+      console.error('Search failed:', error);
+    }
   }, [fetchPage]);
 
   const reset = useCallback(async () => {
-    // Don't clear searchQuery - keep the input visible
-    // setSearchQuery(''); // Remove this line
     setLaunches([]);
     setCurrentPage(1);
     setHasNextPage(false);

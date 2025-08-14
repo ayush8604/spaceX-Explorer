@@ -73,7 +73,7 @@ export function useUserLocation() {
     }
   }, []);
 
-  // Check permission status on mount
+ 
   useEffect(() => {
     checkPermissionStatus();
   }, [checkPermissionStatus]);
