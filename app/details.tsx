@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  Image,
-  StyleSheet,
-  ActivityIndicator,
-  Alert,
-} from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
-import { api } from '../lib/api';
-import { useLaunchpad } from '../hooks/useLaunchpad';
-import MapCard from '../components/MapCard';
-import LoadingState from '../components/LoadingState';
+import React, { useEffect, useState } from 'react';
+import {
+  ActivityIndicator,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native';
 import ErrorState from '../components/ErrorState';
+import LoadingState from '../components/LoadingState';
+import MapCard from '../components/MapCard';
+import { useLaunchpad } from '../hooks/useLaunchpad';
+import { api } from '../lib/api';
 import { Launch } from '../lib/types';
 
 export default function LaunchDetailsScreen() {
@@ -63,10 +62,10 @@ export default function LaunchDetailsScreen() {
   };
 
   const getStatusColor = () => {
-    if (launch?.upcoming) return '#FFA500'; // Orange
-    if (launch?.success === true) return '#4CAF50'; // Green
-    if (launch?.success === false) return '#F44336'; // Red
-    return '#9E9E9E'; // Gray
+    if (launch?.upcoming) return '#FFA500'; 
+    if (launch?.success === true) return '#4CAF50'; 
+    if (launch?.success === false) return '#F44336'; 
+    return '#9E9E9E'; 
   };
 
   const formatDate = (dateString: string) => {
@@ -104,7 +103,6 @@ export default function LaunchDetailsScreen() {
 
   return (
     <ScrollView style={styles.container}>
-      {/* Launch Image */}
       <View style={styles.imageContainer}>
         <Image source={getImageSource()} style={styles.image} />
         <View style={styles.statusBadge}>
@@ -113,7 +111,6 @@ export default function LaunchDetailsScreen() {
         </View>
       </View>
 
-      {/* Launch Details */}
       <View style={styles.detailsContainer}>
         <Text style={styles.missionName}>{launch.name}</Text>
         <Text style={styles.launchDate}>{formatDate(launch.date_utc)}</Text>
@@ -128,7 +125,7 @@ export default function LaunchDetailsScreen() {
           </View>
         )}
 
-        {/* Map Section */}
+       
         {launchpad && (
           <View style={styles.mapSection}>
             <Text style={styles.sectionTitle}>📍 Location</Text>
@@ -136,7 +133,7 @@ export default function LaunchDetailsScreen() {
           </View>
         )}
 
-        {/* Loading or Error for Launchpad */}
+       
         {!launchpad && launchpadLoading && (
           <View style={styles.mapSection}>
             <Text style={styles.sectionTitle}>📍 Location</Text>

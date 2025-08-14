@@ -1,21 +1,21 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TextInput,
-  StyleSheet,
-  RefreshControl,
-  ActivityIndicator,
-  Keyboard,
-  TouchableOpacity,
-} from 'react-native';
 import { useRouter } from 'expo-router';
-import { useLaunches } from '../hooks/useLaunches';
-import LaunchRow from '../components/LaunchRow';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  Keyboard,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import EmptyState from '../components/EmptyState';
 import ErrorState from '../components/ErrorState';
+import LaunchRow from '../components/LaunchRow';
 import LoadingState from '../components/LoadingState';
+import { useLaunches } from '../hooks/useLaunches';
 import { Launch } from '../lib/types';
 
 export default function LaunchListScreen() {
@@ -35,24 +35,21 @@ export default function LaunchListScreen() {
     reset,
   } = useLaunches();
 
-  // Debounced search effect
+ 
   useEffect(() => {
-    // Clear previous timeout
+  
     if (searchTimeoutRef.current) {
       clearTimeout(searchTimeoutRef.current);
     }
 
-    // Set new timeout for 500ms after user stops typing
     searchTimeoutRef.current = setTimeout(() => {
       if (searchText.trim()) {
         search(searchText.trim());
       } else {
-        // If search is empty, show all launches but keep search input
         reset();
       }
     }, 500);
 
-    // Cleanup timeout on unmount
     return () => {
       if (searchTimeoutRef.current) {
         clearTimeout(searchTimeoutRef.current);

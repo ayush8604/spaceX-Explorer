@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform, Linking, Alert } from 'react-native';
+import { Alert, Linking, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import { Launchpad } from '../lib/types';
 import { useUserLocation } from '../hooks/useUserLocation';
 import { calculateDistance, formatDistance } from '../lib/geo';
+import { Launchpad } from '../lib/types';
 
 interface MapCardProps {
   launchpad: Launchpad;
@@ -14,7 +14,7 @@ const MapCard: React.FC<MapCardProps> = ({ launchpad }) => {
   const [distance, setDistance] = useState<number | null>(null);
   const [mapError, setMapError] = useState<string | null>(null);
 
-  // Debug launchpad data
+
   useEffect(() => {
     console.log('MapCard received launchpad:', launchpad);
     console.log('Launchpad coordinates:', {
@@ -36,7 +36,7 @@ const MapCard: React.FC<MapCardProps> = ({ launchpad }) => {
     }
   }, [location, launchpad]);
 
-  // Validate coordinates
+ 
   const isValidCoordinate = (lat: number, lng: number) => {
     return lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180;
   };
@@ -44,7 +44,7 @@ const MapCard: React.FC<MapCardProps> = ({ launchpad }) => {
   const getMapRegion = () => {
     const { latitude, longitude } = launchpad;
     
-    // Always use the actual launchpad coordinates from the API
+   
     return {
       latitude,
       longitude,
@@ -64,17 +64,17 @@ const MapCard: React.FC<MapCardProps> = ({ launchpad }) => {
     let url: string;
 
     if (Platform.OS === 'ios') {
-      // iOS: Apple Maps
+    
       url = `http://maps.apple.com/?daddr=${latitude},${longitude}`;
     } else {
-      // Android: Google Maps
+    
       url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
     }
 
     Linking.openURL(url).catch((err) => {
       console.error('Failed to open maps:', err);
       Alert.alert('Error', 'Failed to open maps application.');
-      // Fallback to Google Maps on web
+     
       if (Platform.OS === 'web') {
         window.open(`https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`);
       }
@@ -127,14 +127,14 @@ const MapCard: React.FC<MapCardProps> = ({ launchpad }) => {
       );
     }
 
-    // Debug info
+    
     console.log('Rendering map with coordinates:', {
       latitude: launchpad.latitude,
       longitude: launchpad.longitude,
       isValid: isValidCoordinate(launchpad.latitude, launchpad.longitude)
     });
 
-    // Always show the map with actual launchpad coordinates from the API
+   
 
     const mapRegion = getMapRegion();
 
@@ -152,7 +152,7 @@ const MapCard: React.FC<MapCardProps> = ({ launchpad }) => {
           loadingBackgroundColor="#ffffff"
           onMapReady={() => console.log('Map loaded successfully')}
         >
-          {/* Launchpad marker */}
+         
           <Marker
             coordinate={{
               latitude: launchpad.latitude,
@@ -163,7 +163,7 @@ const MapCard: React.FC<MapCardProps> = ({ launchpad }) => {
             pinColor="red"
           />
 
-          {/* User location marker */}
+        
           {location && isValidCoordinate(location.latitude, location.longitude) && (
             <Marker
               coordinate={{

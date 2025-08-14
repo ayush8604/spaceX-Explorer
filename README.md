@@ -131,6 +131,8 @@ const requestPermission = async () => {
 
 ### Main Screens
 
+
+
 #### 1. Launch List Screen
 - **Purpose**: Main dashboard showing all SpaceX launches
 - **Features**: 
@@ -214,19 +216,7 @@ const requestPermission = async () => {
 
 ```bash
 # Start development server
-npm start
-
-# Run on Android
-npm run android
-
-# Run on iOS
-npm run ios
-
-# Run on web
-npm run web
-
-# Lint code
-npm run lint
+npm expo start
 ```
 
 ## 🏗️ Project Structure
@@ -251,19 +241,6 @@ spacex/
 │   └── types.ts          # TypeScript definitions
 └── assets/               # Images, fonts, and static files
 ```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-# SpaceX API Configuration
-SPACEX_API_BASE_URL=https://api.spacexdata.com/v4
-
-# Google Maps API Key (for Android)
-GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 ```
 
 ### API Configuration
