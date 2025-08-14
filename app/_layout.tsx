@@ -5,7 +5,7 @@ export default function RootLayout() {
   return (
     <>
       <StatusBar style="light" />
-      <Stack screenOptions={{ headerShown: false }}>
+      <Stack screenOptions={{ headerShown: false }} initialRouteName="landing">
         <Stack.Screen name="landing" />
         <Stack.Screen 
           name="index" 

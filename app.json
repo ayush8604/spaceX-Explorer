@@ -45,6 +45,16 @@
         {
           "locationAlwaysAndWhenInUsePermission": "Allow SPACEX to use your location."
         }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "splash": {
+            "image": "./assets/images/splash-icon.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#000000"
+          }
+        }
       ]
     ],
     "experiments": {

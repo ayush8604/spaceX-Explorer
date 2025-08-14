@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
 import { useRouter } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 
 const { width, height } = Dimensions.get('window');
 
@@ -11,6 +12,9 @@ export default function LandingPage() {
   const slideAnim = new Animated.Value(50);
 
   useEffect(() => {
+    // Hide the splash screen immediately when landing page loads
+    SplashScreen.hideAsync();
+    
     // Animate in
     Animated.parallel([
       Animated.timing(fadeAnim, {
@@ -32,7 +36,7 @@ export default function LandingPage() {
 
     // Navigate to main app after 3 seconds
     const timer = setTimeout(() => {
-      router.replace('/');
+      router.replace('index');
     }, 3000);
 
     return () => clearTimeout(timer);
